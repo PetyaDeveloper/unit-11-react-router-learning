@@ -1,8 +1,9 @@
 import React from 'react';
-import {NavLink, Route} from 'react-router-dom';
-import HTML from './courses/HTML';
-import CSS  from './courses/CSS';
-import JavaScript from './courses/JavaScript';
+import {NavLink, Route, Redirect} from 'react-router-dom';
+
+import CourseContainer from './courses/CourseContainer';
+import { CSSCourses, HTMLCourses, JSCourses } from '../data/courses';
+
 
 const Courses = () => (
   <div className="main-content courses">
@@ -16,9 +17,10 @@ const Courses = () => (
     </div>
     
     {/* Write routes here... */}
-    <Route path="/courses/html" component = { HTML } />
-    <Route path="/courses/css" component = { CSS } />
-    <Route path="/courses/javascript" component = { JavaScript } />
+    <Route exact path="/courses" render = { ()=> <Redirect to="courses/html" /> } />
+    <Route path="/courses/html" render = { ()=>  <CourseContainer data={HTMLCourses} /> } />
+    <Route path="/courses/css" render = { ()=>  <CourseContainer data={CSSCourses} /> } />
+    <Route path="/courses/javascript" render = { ()=>  <CourseContainer data={JSCourses} /> } />
   </div>
 );
 
